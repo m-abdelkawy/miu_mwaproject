@@ -16,13 +16,14 @@ export class SignUpComponent implements OnInit {
      FirstName: '',
      LastName: ''
    };
+   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
   constructor() { }
 
   ngOnInit(){
     
   }
-  resetForm(form: NgForm){
+  resetForm(form?: NgForm){
     if(form != null)
     form.reset();
     this.user ={

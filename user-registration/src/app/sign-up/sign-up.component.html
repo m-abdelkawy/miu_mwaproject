@@ -4,7 +4,7 @@
             <div class="sm-jumbotron center-align " >
                 <h2>User registration</h2>
             </div>
-            <form class="col s12 white" #userRegistrationForm="ngForm">
+            <form class="col s12 white" #userRegistrationForm="ngForm" autocomplete="off">
                    <div class="row">
                     <div class="input-field col s6">
                         <input type="text" class= "validate" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName" required>
@@ -12,12 +12,12 @@
                     </div>
 
                     <div class="input-field col s6">
-                        <input type="password" name="Password" #Password="ngModel" [(ngModel)]="user.Password" required>
-                        <label> #Password </label>
+                        <input type="password" class= "validate" name="Password" #Password="ngModel" [(ngModel)]="user.Password" required minlength="3">
+                        <label data-error = 'Minimum 3 Characters Needed'> Password </label>
                     </div>
 
                     <div class="input-field col s6">
-                        <input type="text"  name="Password" #FirstName="ngModel" [(ngModel)]="user.FirstName">
+                        <input type="text"  name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName">
                         <label> First Name </label>                
                     </div>
 
@@ -30,12 +30,12 @@
                     
 
                     <div class="input-field col s6">
-                        <input type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email">
-                        <label> Email </label>                
+                        <input type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email" [pattern]="emailPattern">
+                        <label data-error="Invalid email"> Email </label>                
                     </div>
 
                     <div class="input-field col s12">
-                        <button class="btn-large btn-submit" type="submit"> Submit</button>
+                        <button class="btn-large btn-submit" [disabled] ="!userRegistrationForm.valid" type="submit"> Submit</button>
 
                     </div>
                 </div>
