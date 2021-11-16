@@ -35,4 +35,8 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  gologin(){
+    this.router.navigate(['/user/login']);
+  }
+
 }

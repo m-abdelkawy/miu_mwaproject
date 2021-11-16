@@ -18,6 +18,9 @@ import { UserService } from './providers/services/user.service';
 import { AuthInterceptor } from './providers/interceptors/auth.interceptor';
 import { ExploreComponent } from './pages/user/explore/explore.component';
 import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,7 @@ import { UserProfileComponent } from './pages/user/user-profile/user-profile.com
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,MatCardModule,MatTabsModule,MatInputModule
   ],
   providers: [UserService, {provide:HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
