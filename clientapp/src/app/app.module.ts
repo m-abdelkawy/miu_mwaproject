@@ -1,38 +1,43 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './pages/home/home.component';
-
-import { MatButtonModule } from '@angular/material/button';
-import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
-import { MatCardModule } from '@angular/material/card';
-import { AuthenticatorComponent } from './tools/authenticator/authenticator.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ValueComponent } from './value/value.component';
 import { LoginComponent } from './pages/user/login/login.component';
+import { RegisterComponent } from './pages/user/register/register.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProfileComponent } from './pages/user/profile/profile.component';
+import { HomeComponent } from './pages/user/home/home.component';
+import { AddtweetComponent } from './pages/tweet/addtweet/addtweet.component';
+import { FollowingComponent } from './pages/user/following/following.component';
+import { FollowersComponent } from './pages/user/followers/followers.component';
+import { UserService } from './providers/services/user.service';
+import { AuthInterceptor } from './providers/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ValueComponent,
+    LoginComponent,
+    RegisterComponent,
+    NavbarComponent,
+    ProfileComponent,
     HomeComponent,
-    AuthenticatorComponent,
-    LoginComponent
+    AddtweetComponent,
+    FollowingComponent,
+    FollowersComponent
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatBottomSheetModule,
-    MatCardModule,
-    NgbModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [UserService, {provide:HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

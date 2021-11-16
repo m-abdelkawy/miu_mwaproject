@@ -27,13 +27,13 @@ class userController {
             const token = await user.generateToken();
             res.status(200).send({
                 apiStatus: true,
-                message: 'registered',
+                message: 'loggedin',
                 data: { user, token }
             })
         } catch (error) {
             res.status(500).send({
                 apiStatus: false,
-                message: 'invalid password',
+                message: 'error logging in',
                 data: error.message
             })
         }
@@ -53,6 +53,15 @@ class userController {
             var id = mongoose.Types.ObjectId(req.params['id']);
             const users = await User.findById({ _id: id });
             res.send({ apiStatus: true, data: users, message: "users loaded successfully" })
+        }
+        catch (e) {
+            res.status(500).send({ apiStatus: false, data: e.message, message: "error loading users" })
+        }
+    }
+
+    static getLoggedInUser = async (req, res) => {
+        try {
+            res.send({ apiStatus: true, data: req.user, message: "users loaded successfully" })
         }
         catch (e) {
             res.status(500).send({ apiStatus: false, data: e.message, message: "error loading users" })
@@ -147,7 +156,7 @@ class userController {
 
     static editProfile = async (req, res) => {
         try {
-            await User.updateOne({_id: req.user.id}, {$set: req.body});
+            await User.updateOne({ _id: req.user.id }, { $set: req.body });
             await req.user.save();
 
             res.status(200).send({
@@ -163,6 +172,35 @@ class userController {
             })
         }
     }
+
+    static getHomeTweets = async (req, res) => {
+        console.log('getHomeTweets called')
+        try {
+            const followingIds = req.user.following;
+            const followings = await User.find({ _id: { $in: followingIds } });
+
+            let tweets = [];
+            //following tweets
+            for (let user of followings) {
+                await user.populate('myTweets');
+                tweets.push(...user.myTweets);
+            }
+            //my tweets
+            await req.user.populate('myTweets');
+
+            tweets.push(...req.user.myTweets);
+
+            tweets.sort(function (a, b) {
+                return new Date(b.createdAt) - new Date(a.createdAt);
+            });
+
+            res.status(200).send({ apiStatus: true, data: tweets, message: "followings loaded successfully!" })
+        } catch (error) {
+            res.status(500).send({ apiStatus: false, data: e.message, message: "error loading followings!" })
+        }
+    }
+
+
 
     //edit profile
     //edit tweet

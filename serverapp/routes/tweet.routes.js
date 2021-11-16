@@ -30,4 +30,5 @@ router.get('/getMyTweets', auth, tweetController.getMyTweets);
 router.delete('/deleteTweet/:id', auth, tweetController.deleteTweet);
 router.patch('/editTweet/:id', auth, tweetController.editTweet);
 
+
 module.exports = router;

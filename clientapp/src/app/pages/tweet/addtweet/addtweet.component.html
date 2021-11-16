@@ -1,0 +1,8 @@
+<form [formGroup]="tweetForm" class="mx-3" (ngSubmit)="addTweet()">
+    <div class="form-group" >
+        <label for="exampleFormControlTextarea1">Example textarea</label>
+        <textarea formControlName="content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <button [disabled]="!tweetForm.valid" type="submit" class="btn btn-primary">Tweet</button>
+
+</form>

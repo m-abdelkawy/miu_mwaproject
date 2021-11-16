@@ -5,6 +5,7 @@ class tweetController {
         try {
             const tweet = new Tweet({
                 userId: req.user._id,
+                userName:  req.user.firstName + " " +req.user.lastName,
                 ...req.body
             });
             await tweet.save();
