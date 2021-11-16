@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/providers/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -9,33 +10,27 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  
-  errLogin = ""
   loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$")]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)])
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)])
   })
-  constructor(private _global: GlobalService, private router: Router, private toastr: ToastrService) {}
+  constructor(private userService: UserService, private router: Router) { }
+
   ngOnInit(): void {
   }
-  get email() { return this.loginForm.get("email") }
-  get password() { return this.loginForm.get("password") }
-  login() {
-    if (this.loginForm.valid) {
-      this._global.loginUser(this.loginForm.value).subscribe(
-        (data) => {
-          localStorage.setItem('Token', data.data.token)
-          this._global.userData = data.data.user
-        },
-        (e) => {  this.errLogin = e.error.data },
-        () => {
-          this.errLogin = ""
-          this._global.isAuthed = true
-          if (this._global.userData.userType == 'client') this._global.isClient = true
-          else if (this._global.userData.userType == 'freelancer') this._global.isFreelancer = true
-          else if (this._global.userData.userType == 'admin') this._global.isAdmin = true
-          this.toastr.success('Success!', 'logged in!')
-          this.router.navigate(["/user"])
+
+  login(){
+    if(this.loginForm.valid){
+      this.userService.login(this.loginForm.value).subscribe(
+        res => {
+          localStorage.setItem('token', res.data.token);
+          this.userService.userData = res.data.user;
+          console.log(res);
+        },err=>{
+          console.log(err);
+        },()=>{
+          this.router.navigate(['/user/home']);
+          this.userService.isLoggedIn = true;
         }
       )
     }

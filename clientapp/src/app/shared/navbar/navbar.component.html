@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" >
+    <a class="navbar-brand" href="#">Twitter</a>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+
+            <ng-container *ngIf="this.userService.isLoggedIn">
+                <li class="nav-item active" >
+                    <a class="nav-link" [routerLink]="['/user/home']" routerLinkActive="router-link-active" >Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/user/following']" routerLinkActive="router-link-active" >Following <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/user/followers']" routerLinkActive="router-link-active" >Followers <span class="sr-only">(current)</span></a>
+                </li>
+                
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/user/profile']" routerLinkActive="router-link-active" >Profile <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/user/login']" routerLinkActive="router-link-active" (click)="logout()">Logout <span class="sr-only">(current)</span></a>
+                </li>
+            </ng-container> 
+            <ng-container *ngIf="!this.userService.isLoggedIn">
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/user/login']" routerLinkActive="router-link-active" >Login <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/user/register']" routerLinkActive="router-link-active" >Register <span class="sr-only">(current)</span></a>
+                </li>
+            </ng-container>
+        </ul>
+        
+    </div>
+</nav>

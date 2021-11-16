@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 let userSchema = new Schema({
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
-    password: {type: String, required: true},
+    password: {type: String, required: true, minlength: 6},
     email: {type: String, required: true, unique: true},
     followers: [{type: Schema.Types.ObjectId, ref: "User"}],
     following: [{type: Schema.Types.ObjectId, ref: "User"}],
