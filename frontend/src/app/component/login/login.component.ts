@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonService } from 'src/app/common.service';
 
 @Component({
   selector: 'app-login',
@@ -10,12 +11,15 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
     login: any=FormGroup;
   
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router, private commserv: CommonService) { }
 
   ngOnInit(): void {
     this.login = this.fb.group({
       name:['', Validators.required],
       password:['', Validators.required]
+    })
+    this.commserv.getUser().subsribe((data:any) => {
+      console.log(data)
     })
 
   }

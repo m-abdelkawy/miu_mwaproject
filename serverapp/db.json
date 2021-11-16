@@ -1,0 +1,9 @@
+
+{"users":[
+    {"User Name": "Emma", "First Name": "Amanuel", "Last Name" : "Tesfamichael", "Password":"1234", "Email": "aman@gmail.com", "id": 1},
+    {"User Name": "Ellie", "First Name": "Ellilta", "Last Name" : "Tesfamichael", "Password":"2345", "Email": "Ellil@gmail.com", "id": 2},
+    {"User Name": "Asmie", "First Name": "Asmerom", "Last Name" : "Tesfamichael", "Password":"3456", "Email": "Asmer@gmail.com", "id": 3}
+
+]
+}
+
