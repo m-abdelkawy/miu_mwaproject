@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'demoApp';
+  title = 'appComponent';
   email: string | any;
   password: string | any;
   rname: string | any;
