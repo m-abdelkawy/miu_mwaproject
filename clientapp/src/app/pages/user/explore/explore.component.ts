@@ -2,23 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/providers/services/user.service';
 
 @Component({
-  selector: 'app-followers',
-  templateUrl: './followers.component.html',
-  styleUrls: ['./followers.component.css']
+  selector: 'app-explore',
+  templateUrl: './explore.component.html',
+  styleUrls: ['./explore.component.css']
 })
-export class FollowersComponent implements OnInit {
+export class ExploreComponent implements OnInit {
 
-  followers: Array<any> = [];
+  users: Array<any> = [];
 
   constructor(public userService: UserService) { }
 
   ngOnInit(): void {
-    this.loadFollowers();
+    this.loadUsers();
   }
 
-  loadFollowers() {
-    this.userService.loadFollowrs().subscribe(
-      res => this.followers = res.data
+  loadUsers() {
+    this.userService.getAllUsers().subscribe(
+      res => {
+        this.users = res.data;
+      }, err => { },
+      () => { }
     )
   }
 
@@ -35,4 +38,10 @@ export class FollowersComponent implements OnInit {
     )
     this.userService.userData.following = this.userService.userData.following.filter((_id: any) => _id != id);
   }
+
+  // getUserById(id: any){
+  //   console.log('aaaaaaaaa');
+  //   this.userService.getUserById(id).subscribe(res=>console.log(res));
+  // }
+
 }

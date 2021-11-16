@@ -30,7 +30,32 @@ export class UserService {
     return this.http.get(`${this.apiUrl}/profile`);
   }
 
+  getUserById(id: any):Observable<any>{
+    return this.http.get(`${this.apiUrl}//users/${id}`);
+  }
+
   getHomeTweets():Observable<any>{
     return this.http.get(`${this.apiUrl}/homeTweets`);
+  }
+
+  getAllUsers():Observable<any>{
+    return this.http.get(`${this.apiUrl}/users`);
+  }
+
+  follow(id: any):Observable<any>{
+    return this.http.post(`${this.apiUrl}/follow/${id}`, null);
+  }
+
+  unfollow(id: any):Observable<any>{
+    return this.http.post(`${this.apiUrl}/unfollow/${id}`, null);
+  }
+
+  loadFollowrs():Observable<any>{
+    return this.http.get(`${this.apiUrl}/followers`);
+  }
+
+  
+  loadFollowings():Observable<any>{
+    return this.http.get(`${this.apiUrl}/followings`);
   }
 }

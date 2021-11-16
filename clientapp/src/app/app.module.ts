@@ -16,6 +16,8 @@ import { FollowingComponent } from './pages/user/following/following.component';
 import { FollowersComponent } from './pages/user/followers/followers.component';
 import { UserService } from './providers/services/user.service';
 import { AuthInterceptor } from './providers/interceptors/auth.interceptor';
+import { ExploreComponent } from './pages/user/explore/explore.component';
+import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { AuthInterceptor } from './providers/interceptors/auth.interceptor';
     HomeComponent,
     AddtweetComponent,
     FollowingComponent,
-    FollowersComponent
+    FollowersComponent,
+    ExploreComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
