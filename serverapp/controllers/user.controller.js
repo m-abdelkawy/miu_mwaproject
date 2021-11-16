@@ -74,7 +74,13 @@ class userController {
             //let id  = req.params['id'];
             req.user.following.push(id);
 
+            //get user
+            let userToFollow = await User.findOne({ _id: id });
+            userToFollow.followers.push(req.user._id);
+
             await req.user.save();
+            await userToFollow.save();
+
             res.send({ apiStatus: true, data: req.user, message: "added following successfully!" })
         } catch (error) {
             res.status(500).send({ apiStatus: false, data: e.message, message: "error following user" })
@@ -85,11 +91,15 @@ class userController {
         try {
             let id = req.params['id'];
             req.user.following = req.user.following.filter(followingId => followingId.toString() != id);
-            await req.user.save();
-            res.status(200).send({ apiStatus: true, data: req.user, message: "unfollowed successfully!" })
 
+            let userToUnfollow = await User.findOne({ _id: id });
+            userToUnfollow.followers = userToUnfollow.followers.filter(id => id != req.user._id);
+
+            await req.user.save();
+            await userToUnfollow.save();
+            res.status(200).send({ apiStatus: true, data: req.user, message: "unfollowed successfully!" });
         } catch (error) {
-            res.status(500).send({ apiStatus: false, data: e.message, message: "error unfollowing user" })
+            res.status(500).send({ apiStatus: false, data: e.message, message: "error unfollowing user" });
 
         }
     }
@@ -105,7 +115,7 @@ class userController {
         }
     }
 
-    static getFollowing = async (req, res) => {
+    static getFollowings = async (req, res) => {
         try {
             const followingIds = req.user.following;
             const followings = await User.find({ _id: { $in: followingIds } });

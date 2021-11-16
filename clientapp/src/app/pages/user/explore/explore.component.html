@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="card my-3" *ngFor="let user of users">
+       <div class="card-header"><a [routerLink]="['/user/profile/', user._id]" routerLinkActive="router-link-active" > {{user.firstName}} {{user.lastName}}</a></div>
+        <div class="card-body">
+          <p class="card-text">
+            With supporting text below as a natural lead-in to additional content.
+          </p>
+          <a *ngIf="!userService.userData.following.includes(user._id)" (click)="follow(user._id)" class="btn btn-primary">Follow</a>
+          <a *ngIf="userService.userData.following.includes(user._id)" (click)="unfollow(user._id)" class="btn btn-danger">Unfollow</a>
+        </div>
+      </div>
+</div>

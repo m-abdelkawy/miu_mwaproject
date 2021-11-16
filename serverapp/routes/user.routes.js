@@ -16,7 +16,7 @@ router.post('/follow/:id', auth, userController.follow)
 router.post('/unfollow/:id', auth, userController.unfollow)
 
 router.get('/followers', auth, userController.getFollowers);
-router.get('/following', auth, userController.getFollowing);
+router.get('/followings', auth, userController.getFollowings);
 
 router.get('/following/tweets', auth, userController.getFollowingTweets);
 router.get('/homeTweets', auth, userController.getHomeTweets);

@@ -1,1 +1,12 @@
-<p>following works!</p>
+<div class="container">
+    <div class="card my-3" *ngFor="let user of followings">
+        <div class="card-header">{{user.firstName}} {{user.lastName}}</div>
+        <div class="card-body">
+          <p class="card-text">
+            With supporting text below as a natural lead-in to additional content.
+          </p>
+          <a *ngIf="!userService.userData.following.includes(user._id)" (click)="follow(user._id)" class="btn btn-primary">Follow</a>
+          <a *ngIf="userService.userData.following.includes(user._id)" (click)="unfollow(user._id)" class="btn btn-primary">Unfollow</a>
+        </div>
+      </div>
+</div>
