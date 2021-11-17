@@ -1,12 +1,20 @@
-<app-addtweet (tweetEmitter)="addTweet($event)"></app-addtweet>
-
-<div class="container">
-    <div class="card my-3" *ngFor="let tweet of tweets">
-        <div class="card-header">
-            <a [routerLink]="['/routePath']" routerLinkActive="router-link-active" >{{ tweet.userName }}</a>
-        </div>
-        <div class="card-body">
-            <p class="card-text">{{ tweet.content }}</p>
+<div class="homecontainer">
+    <app-addtweet (tweetEmitter)="addTweet($event)"></app-addtweet>
+    
+    <div class="container">
+        <div class="card my-3" *ngFor="let tweet of tweets">
+            <div class="card-header">
+                <a [routerLink]="['/user/profile/', tweet.userId]" routerLinkActive="router-link-active" >{{ tweet.userName }}</a>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ tweet.content }}</p>
+                <hr>
+                <div class="card-text">
+                    <button mat-button>LIKE</button>
+                    <button mat-button>SHARE</button>
+                    <button mat-button>COMMENT</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

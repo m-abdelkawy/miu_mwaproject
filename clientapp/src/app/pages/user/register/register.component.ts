@@ -10,7 +10,7 @@ import { UserService } from 'src/app/providers/services/user.service';
 })
 export class RegisterComponent implements OnInit {
 
-  errLog: string ="";
+  errLog: string = "";
   registerForm = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
@@ -22,17 +22,21 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  register(){
-    if(this.registerForm.valid){
-      this.userService.register(this.registerForm.value).subscribe(res =>{
+  register() {
+    if (this.registerForm.valid) {
+      this.userService.register(this.registerForm.value).subscribe(res => {
         console.log(res);
       },
-      err => this.errLog = err.error.data,
-      () =>{
-        this.router.navigate(['/user/login']);
-      }
+        err => this.errLog = err.error.data,
+        () => {
+          this.router.navigate(['/user/login']);
+        }
       );
     }
+  }
+
+  gotoLogin(){
+    this.router.navigate(['/user/login']);
   }
 
 }

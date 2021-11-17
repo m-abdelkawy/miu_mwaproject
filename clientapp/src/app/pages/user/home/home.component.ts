@@ -10,8 +10,6 @@ export class HomeComponent implements OnInit {
 
   tweets: Array<any> = [];
 
-
-
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
